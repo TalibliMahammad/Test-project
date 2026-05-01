@@ -17,11 +17,13 @@ const CreatePostModal = ({ open, handleClose, setPosts, }) => {
  
 
   const handleAddPost = async () => {
-    const newPost = { id: Date.now(), title: "User Name", body: title, imgId: Math.floor(Math.random() * 99) + 1 };
+    const newPost = { id: Date.now(), title: "User Name", body: title};
     setPosts((prev) => [newPost, ...prev]);
     setTitle("");
     handleClose(); 
   };
+
+ console.log( "render olundu CreatePostModal");
 
   return (
     <StyledModal open={open} onClose={handleClose}>

@@ -1,49 +1,53 @@
 import React from 'react';
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import Favorite from "@mui/icons-material/Favorite";
-import Share from "@mui/icons-material/Share";
-import Delete from "@mui/icons-material/Delete";
 
-const Feed = ({ posts, onDelete }) => { // onDelete funksiyasını bura əlavə edə bilərsən
+const Feed = ({ posts }) => {
   return (
-    <Box flex={4} p={{ xs: 0, md: 2 }}> {/* Mobildə kənar boşluqları azaldırıq */}
+    <div className="flex flex-col gap-6">
       {posts.map((post) => (
-        <Card key={post.id} sx={{ margin: { xs: 2, md: 5 }, borderRadius: 2 }}>
-          <CardHeader
-            avatar={<Avatar sx={{ bgcolor: "royalblue" }}>{post.title ? post.title[0] : "M"}</Avatar>}
-            title={post.title || "Mahammad Talibli"} 
-            subheader="April 2026"
-          />
-          <CardMedia
-            component="img"
-            height="400"
-            image={`https://randomuser.me/api/portraits/men/${post.imgId}.jpg`}
-            alt="Post image"
-            sx={{ objectFit: "cover" }}
-          />
-          <CardContent>
-            <Typography variant="body1" color="text.primary">
+        <div key={post.id} className="border-b border-gray-200 pb-6">
+          {/* Header */}
+          <div className="flex items-center justify-between py-3 px-1">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 to-purple-600 p-[1.5px]">
+                <div className="bg-white rounded-full p-[1px]">
+                  <img src={`https://i.pravatar.cc/150?u=${post.id}`} className="rounded-full" alt="avatar" />
+                </div>
+              </div>
+              <span className="font-semibold text-sm">mahammad_talibli</span>
+              <span className="text-gray-400 text-sm">• 1h</span>
+            </div>
+            <button className="font-bold tracking-widest text-lg">...</button>
+          </div>
+
+          {/* Post Image */}
+          <div className="rounded border border-gray-200 overflow-hidden bg-gray-50">
+            <img 
+              loading="lazy"
+              src={`https://picsum.photos/seed/${post.id}/600/600`} 
+              className="w-full object-cover aspect-square"
+              alt="post" 
+            />
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-4 py-3 text-2xl">
+             <button className="hover:opacity-50 transition">❤️</button>
+             <button className="hover:opacity-50 transition">💬</button>
+             <button className="hover:opacity-50 transition">✈️</button>
+          </div>
+
+          {/* Content */}
+          <div className="px-1">
+            <p className="text-sm font-semibold mb-1">1,234 likes</p>
+            <p className="text-sm">
+              <span className="font-semibold mr-2">user_name</span>
               {post.body}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton><Favorite color="error" /></IconButton>
-            <IconButton><Share /></IconButton>
-            <IconButton sx={{ marginLeft: "auto" }}> {/* Silmə düyməsini sağa itələyirik */}
-              <Delete />
-            </IconButton>
-          </CardActions>
-        </Card>
+            </p>
+            <p className="text-gray-400 text-xs mt-2 uppercase tracking-wide">View all comments</p>
+          </div>
+        </div>
       ))}
-    </Box>
+    </div>
   );
 };
 

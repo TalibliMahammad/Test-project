@@ -1,71 +1,38 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Avatar from '@mui/material/Avatar';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import { useState } from 'react';
 
-const Rightbar = ({}) => {
+const Rightbar = () => {
   return (
-    <Box
-      className="flex justify-around items-start"
-      flex={2}
-      p={2}
-      sx={{
-        display: { xs: 'none', sm: 'block' },
-        backgroundColor: '#f5f5f5',
-        borderRadius: 2,
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-     
-      <Box position="fixed" width={300}>
-        <Typography variant="h6" fontWeight={100}>
-          Online Friends
-        </Typography>
-        <AvatarGroup max={7} sx={{ mb: 2 }}>
-          <Avatar
-            alt="Remy Sharp"
-            src="https://material-ui.com/static/images/avatar/1.jpg"
-          />
-          <Avatar
-            alt="Travis Howard"
-            src="https://material-ui.com/static/images/avatar/2.jpg"
-          />
-          <Avatar
-            alt="Cindy Baker"
-            src="https://material-ui.com/static/images/avatar/3.jpg"
-          />
-        </AvatarGroup>
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <img src="https://i.pravatar.cc/150?u=me" className="w-12 h-12 rounded-full" alt="me" />
+          <div>
+            <p className="text-sm font-semibold">talibli.dev</p>
+            <p className="text-sm text-gray-500">Mahammad Talibli</p>
+          </div>
+        </div>
+        <button className="text-blue-500 text-xs font-bold">Switch</button>
+      </div>
 
-        <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
-          Latest Photos
-        </Typography>
-        <ImageList cols={3} rowHeight={100} gap={5}>
-          <ImageListItem>
-            <img
-              src="https://randomuser.me/api/portraits/men/1.jpg"
-              alt="user"
-         
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://randomuser.me/api/portraits/men/2.jpg"
-              alt="user"
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://randomuser.me/api/portraits/men/3.jpg"
-              alt="user"
-            />
-          </ImageListItem>
-        </ImageList>
-      </Box>
-    </Box>
+      <div className="flex justify-between mt-4">
+        <span className="text-sm font-semibold text-gray-500">Suggested for you</span>
+        <button className="text-xs font-bold">See All</button>
+      </div>
+
+      {/* Suggestion Item */}
+      {[1, 2, 3].map(id => (
+        <div key={id} className="flex items-center justify-between py-2">
+          <div className="flex items-center gap-3">
+            <img src={`https://i.pravatar.cc/150?u=${id+10}`} className="w-8 h-8 rounded-full" alt="user" />
+            <div>
+              <p className="text-sm font-semibold">user_{id}44</p>
+              <p className="text-xs text-gray-500">Followed by ali + 2 others</p>
+            </div>
+          </div>
+          <button className="text-blue-500 text-xs font-bold">Follow</button>
+        </div>
+      ))}
+    </div>
   );
 };
 

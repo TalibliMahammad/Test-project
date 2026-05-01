@@ -1,54 +1,24 @@
-import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
-import InputBase from "@mui/material/InputBase";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import React from 'react';
 
-import { Mail, Notifications } from "@mui/icons-material";
-
-import { styled } from "@mui/material/styles";
-
-const StyledToolbar = styled(Toolbar)({
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-const Search = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: theme.shape.borderRadius,
-  width: "40%",
-}));
-
-const Icons = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "20px",
-}));
-
-const Navbar = () => {
+const Navbar = ({ onOpen }) => {
   return (
-    <AppBar position="sticky">
-      <StyledToolbar>
-        <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
-          sarkhanrahimlidev
-        </Typography>
-        <Search>
-          <InputBase placeholder="Search by name..." sx={{ width: "100%" }} />
-        </Search>
-        <Icons>
-          <Badge badgeContent={1} color="error">
-            <Mail />
-          </Badge>
-          <Badge badgeContent={7} color="error">
-            <Notifications />
-          </Badge>
-          <Avatar sx={{ width: 30, height: 30 }} src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" />
-        </Icons>
-      </StyledToolbar>
-    </AppBar>
+    <nav className="fixed top-0 w-full bg-white border-b border-gray-200 z-50 h-16 flex items-center">
+      <div className="max-w-[1200px] mx-auto w-full px-4 flex justify-between items-center">
+        <h1 className="text-2xl font-bold tracking-tighter italic">Instagram.az</h1>
+        
+        <input 
+          type="text" 
+          placeholder="Search" 
+          className="hidden sm:block bg-gray-100 rounded-lg px-4 py-2 w-64 outline-none focus:ring-1 ring-gray-300"
+        />
+
+        <div className="flex items-center gap-6 text-2xl">
+          <button onClick={onOpen} className="hover:scale-110 transition">➕</button>
+          <button className="hover:scale-110 transition">🔔</button>
+          <img src="https://i.pravatar.cc/150?u=my" className="w-7 h-7 rounded-full border border-gray-200" alt="me" />
+        </div>
+      </div>
+    </nav>
   );
 };
 

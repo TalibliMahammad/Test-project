@@ -1,9 +1,4 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Feed from './components/Feed';
@@ -14,52 +9,39 @@ function App() {
   const [open, setOpen] = useState(false);
   const [posts, setPosts] = useState([]);
 
-  const handleOpen = useCallback(() => setOpen(true), []);
-  const handleClose = useCallback(() => setOpen(false), []);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const sortedPosts = useMemo(() => {
     return [...posts].sort((a, b) => b.id - a.id);
   }, [posts]);
 
   return (
-    <Box bgcolor={"background.default"} color={"text.primary"}>
-      <Navbar />
-      {/* Container daxilində Stack istifadə edərək yan-yana düzürük */}
-      <Container maxWidth="xl">
-        <Stack 
-          direction="row" 
-          spacing={2} 
-          justifyContent="space-between"
-        >
-          {/* Sidebar: flex=1 (Sol tərəf) */}
+    <div className="bg-white min-h-screen">
+      <Navbar onOpen={handleOpen} />
+      <div className="max-w-[1200px] mx-auto flex justify-center gap-8 pt-20 px-4">
+        {/* Sol Menyu */}
+        <div className="hidden lg:block w-[240px] sticky top-20 h-fit">
           <Sidebar />
-          
-          {/* Feed: flex=4 (Orta hissə - daha geniş) */}
+        </div>
+
+        {/* Orta Feed */}
+        <main className="w-full max-w-[470px] flex-shrink-0">
           <Feed posts={sortedPosts} />
-          
-          {/* Rightbar: flex=2 (Sağ tərəf) */}
+        </main>
+
+        {/* Sağ Panel */}
+        <div className="hidden md:block w-[320px] sticky top-20 h-fit">
           <Rightbar />
-        </Stack>
-      </Container>
-      
-      <Fab 
-        color="primary" 
-        sx={{ 
-          position: "fixed", 
-          bottom: 20, 
-          left: { xs: "calc(50% - 25px)", md: 30 } 
-        }}
-        onClick={handleOpen}
-      >
-        <AddIcon />
-      </Fab>
+        </div>
+      </div>
 
       <CreatePostModal 
         open={open} 
         handleClose={handleClose} 
         setPosts={setPosts} 
       />
-    </Box>
+    </div>
   );
 }
 
