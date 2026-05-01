@@ -12,35 +12,34 @@ import Favorite from "@mui/icons-material/Favorite";
 import Share from "@mui/icons-material/Share";
 import Delete from "@mui/icons-material/Delete";
 
-const Feed = ({ posts}) => {
-
-
-
-
+const Feed = ({ posts, onDelete }) => { // onDelete funksiyasını bura əlavə edə bilərsən
   return (
-    <Box flex={4} p={2}>
+    <Box flex={4} p={{ xs: 0, md: 2 }}> {/* Mobildə kənar boşluqları azaldırıq */}
       {posts.map((post) => (
-        <Card key={post.id} sx={{ margin: 5 }}>
+        <Card key={post.id} sx={{ margin: { xs: 2, md: 5 }, borderRadius: 2 }}>
           <CardHeader
-            avatar={<Avatar sx={{ bgcolor: "red" }}>S</Avatar>}
+            avatar={<Avatar sx={{ bgcolor: "royalblue" }}>{post.title ? post.title[0] : "M"}</Avatar>}
             title={post.title || "Mahammad Talibli"} 
             subheader="April 2026"
           />
           <CardMedia
             component="img"
-            height="20%"
-            image={`https://randomuser.me/api/portraits/men/${post.imgId}.jpg`} // Nümunə şəkil
+            height="400"
+            image={`https://randomuser.me/api/portraits/men/${post.imgId}.jpg`}
             alt="Post image"
+            sx={{ objectFit: "cover" }}
           />
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body1" color="text.primary">
               {post.body}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
             <IconButton><Favorite color="error" /></IconButton>
             <IconButton><Share /></IconButton>
-            <IconButton><Delete /></IconButton>
+            <IconButton sx={{ marginLeft: "auto" }}> {/* Silmə düyməsini sağa itələyirik */}
+              <Delete />
+            </IconButton>
           </CardActions>
         </Card>
       ))}
@@ -48,4 +47,4 @@ const Feed = ({ posts}) => {
   );
 };
 
-export default React.memo(Feed); // Lazımsız renderlərin qarşısını almaq üçün
+export default React.memo(Feed);
